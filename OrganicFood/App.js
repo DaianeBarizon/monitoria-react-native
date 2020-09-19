@@ -16,8 +16,9 @@ const App = () => {
 export default App;
 */
 
-import React, {useState} from 'react';
-import {Text, View, TextInput, FlatList, Button} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {Text, TextInput, FlatList, Button} from 'react-native';
+import axios from 'axios';
 
 export default function App() {
   //ao invés de armazenar um único objeto que guarda todo estado que aquele componente pode manipular
@@ -38,16 +39,34 @@ export default function App() {
     {id: '3', nome: 'repo-3'},
     {id: '4', nome: 'repo-4'},
   ]);
-  const [count, setCount] = useState(4);
+
+  // const [count, setCount] = useState(4);
+
+  //primeiro é uma função, ou seja, o corpo do seu conteúdo e a segunda é um array de dependências
+  //quais circunstâncias ela deve ser executada
+  //se eu passar repositories só vai executar quando a variável repositories alterar
+  //posso passar várias variáveis, quando uma alterar a função vai ser executada
+  useEffect(() => {
+    axios
+      .get('https://api.github.com/users/daianebarizon/repos')
+      .then((response) => {
+        console.log('repositories', response.data);
+        const nameRepositorie = response.data;
+        setRepositories(nameRepositorie);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   //função dentro de função
-  const handleRepositories = () => {
-    setCount(count + 1);
-    setRepositories([
-      ...repositories,
-      {id: Math.random(), nome: `repo-${count}`},
-    ]);
-  };
+  // const handleRepositories = () => {
+  //   setCount(count + 1);
+  //   setRepositories([
+  //     ...repositories,
+  //     {id: Math.random(), nome: `repo-${count}`},
+  //   ]);
+  // };
 
   return (
     <>
@@ -67,11 +86,11 @@ export default function App() {
       <Text list={courses} />
       <FlatList
         data={repositories}
-        renderItem={({item}) => <Text>{item.nome}</Text>}
-        keyExtractor={(item) => item.id}
+        renderItem={({item}) => <Text>{item.name}</Text>}
+        keyExtractor={(item) => item.id.toString()}
       />
-      <Text list={repositories} />
-      <Button onPress={handleRepositories} title={'Pressione aqui'} />
+      {/* <Text list={repositories} /> */}
+      {/* <Button onPress={handleRepositories} title={'Pressione aqui'} /> */}
     </>
   );
 }
