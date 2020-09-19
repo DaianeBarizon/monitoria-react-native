@@ -16,21 +16,41 @@ const App = () => {
 export default App;
 */
 
-/*
-import React from 'react'
-import { View, Text } from 'react-native'
+import React, {useState} from 'react';
+import {Text, View, TextInput, FlatList} from 'react-native';
 
 export default function App() {
+  const [myText, setMyText] = useState('Meu Texto');
+  const courses = [
+    {id: '1', nome: '•React'},
+    {id: '2', nome: '•React Native'},
+    {id: '3', nome: '•JavaScript'},
+    {id: '4', nome: '•Node'},
+  ];
+
   return (
     <View>
-      <Text></Text>
+      <Text>Hello</Text>
+      <TextInput
+        value={myText}
+        onChangeText={(text) => {
+          setMyText(text);
+        }}
+      />
+      <Text> {myText} </Text>
+      <FlatList
+        data={courses}
+        renderItem={({item}) => <Text>{item.nome}</Text>}
+        keyExtractor={(item) => item.id}
+      />
+      <Text list={courses} />
     </View>
-  )
+  );
 }
-*/
 
 // Componentes Classe
 
+/*
 import React, {Component} from 'react';
 import {Text, View, TextInput, FlatList} from 'react-native';
 
@@ -68,3 +88,4 @@ export default class App extends Component {
     );
   }
 }
+*/
