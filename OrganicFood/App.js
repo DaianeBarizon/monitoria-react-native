@@ -17,9 +17,10 @@ export default App;
 */
 
 import React, {useState} from 'react';
-import {Text, View, TextInput, FlatList} from 'react-native';
+import {Text, View, TextInput, FlatList, Button} from 'react-native';
 
 export default function App() {
+  //ao invés de armazenar um único objeto que guarda todo estado que aquele componente pode manipular
   const [myText, setMyText] = useState('Meu Texto');
   const courses = [
     {id: '1', nome: '•React'},
@@ -28,8 +29,28 @@ export default function App() {
     {id: '4', nome: '•Node'},
   ];
 
+  //2 indices, a primeira com valor inicial e a segunda é uma função que atualiza este valor inicial
+  //temos um useState para cada tipo de informação que a gente quer armazenar
+  //guardamos pequenos trechos de informações
+  const [repositories, setRepositories] = useState([
+    {id: '1', nome: 'repo-1'},
+    {id: '2', nome: 'repo-2'},
+    {id: '3', nome: 'repo-3'},
+    {id: '4', nome: 'repo-4'},
+  ]);
+  const [count, setCount] = useState(4);
+
+  //função dentro de função
+  const handleRepositories = () => {
+    setCount(count + 1);
+    setRepositories([
+      ...repositories,
+      {id: Math.random(), nome: `repo-${count}`},
+    ]);
+  };
+
   return (
-    <View>
+    <>
       <Text>Hello</Text>
       <TextInput
         value={myText}
@@ -44,7 +65,14 @@ export default function App() {
         keyExtractor={(item) => item.id}
       />
       <Text list={courses} />
-    </View>
+      <FlatList
+        data={repositories}
+        renderItem={({item}) => <Text>{item.nome}</Text>}
+        keyExtractor={(item) => item.id}
+      />
+      <Text list={repositories} />
+      <Button onPress={handleRepositories} title={'Pressione aqui'} />
+    </>
   );
 }
 
