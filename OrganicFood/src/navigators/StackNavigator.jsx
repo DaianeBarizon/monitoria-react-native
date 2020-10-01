@@ -16,11 +16,11 @@ const StackNavigator = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="Home"
+        name="HomeStack"
         component={DrawerNavigator}
         options={{headerShown: false}}
       />
-      <Stack.Screen name="Carrinho" component={Carrinho} />
+      <Stack.Screen name="CarrinhoStack" component={Carrinho} />
     </Stack.Navigator>
   );
 };
