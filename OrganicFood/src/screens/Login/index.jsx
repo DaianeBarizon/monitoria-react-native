@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
@@ -10,8 +11,12 @@ const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
-  const handleOnPressEntrarHome = () => {
-    navigation.navigate('HomeStack');
+  //salvar uma informação
+  const salvar = () => {
+    console.log(email);
+    requestAnimationFrame(() => {
+      navigation.navigate('HomeStack');
+    });
   };
 
   return (
@@ -32,7 +37,7 @@ const Login = ({navigation}) => {
         </View>
         <Button
           title="Entrar"
-          onPress={handleOnPressEntrarHome}
+          onPress={salvar}
           textStyle={{color: '#FFF'}}
           style={{backgroundColor: '#C13355'}}
         />

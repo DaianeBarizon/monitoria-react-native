@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import {View, Text, FlatList, ScrollView} from 'react-native';
+import {View, Text, FlatList, SafeAreaView} from 'react-native';
 import ItemCard from '../../components/ItemCard/ItemCard';
 import ItemFood from '../../components/ItemFood/ItemFood';
 
@@ -69,26 +69,28 @@ const FRUTAS = [
 ];
 
 const HomeStack = () => {
-  const email = 'dai';
+  const emails = 'dai';
 
   return (
-    <ScrollView>
-      <View style={styles.scrollView}>
-        <Text style={styles.title}>{`Oi, ${email}`}</Text>
+    <View style={styles.scrollView}>
+      <Text style={styles.title}>{`Oi, ${emails}`}</Text>
+      <SafeAreaView style={styles.container}>
         <FlatList
           data={FOOD}
           horizontal={true}
           renderItem={({item}) => <ItemFood item={item} />}
           keyExtractor={(item) => item.id}
         />
-        <Text style={styles.title}>Frutas</Text>
+      </SafeAreaView>
+      <Text style={styles.title}>Frutas</Text>
+      <SafeAreaView style={styles.container}>
         <FlatList
           data={FRUTAS}
           renderItem={({item}) => <ItemCard item={item} />}
           keyExtractor={(item) => item.id}
         />
-      </View>
-    </ScrollView>
+      </SafeAreaView>
+    </View>
   );
 };
 
