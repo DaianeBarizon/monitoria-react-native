@@ -4,6 +4,7 @@ import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import Button from '../../components/Button/Button';
 import Input from '../../components/TextInput/TextInput';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import styles from './styles';
 
@@ -12,12 +13,40 @@ const Login = ({navigation}) => {
   const [senha, setSenha] = useState('');
 
   //salvar uma informação
-  const salvar = () => {
-    console.log(email);
-    requestAnimationFrame(() => {
-      navigation.navigate('HomeStack');
-    });
+
+  const salvar = async () => {
+    const usuario = {
+      email,
+      senha,
+    };
+
+    try {
+      const jsonValue = JSON.stringify(usuario);
+      await AsyncStorage.setItem('usuario', jsonValue);
+    } catch (e) {
+      // saving error
+    }
   };
+
+  const mostrar = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('usuario');
+      const usuario = JSON.parse(jsonValue);
+      console.log(usuario);
+    } catch (e) {
+      // error reading value
+    }
+  };
+
+  // async function mostrar() {
+  //   const json = await AsyncStorage.getItem('usuario');
+  //   const usuario = JSON.parse(json);
+  //   console.log(usuario);
+  // }
+
+  async function deletar() {
+    await AsyncStorage.removeItem('usuario');
+  }
 
   return (
     <View style={styles.container}>
@@ -40,6 +69,18 @@ const Login = ({navigation}) => {
           onPress={salvar}
           textStyle={{color: '#FFF'}}
           style={{backgroundColor: '#C13355'}}
+        />
+        <Button
+          title="Mostrar"
+          onPress={mostrar}
+          textStyle={{color: '#FFF'}}
+          style={{backgroundColor: '#323224'}}
+        />
+        <Button
+          title="Deletar"
+          onPress={deletar}
+          textStyle={{color: '#FFF'}}
+          style={{backgroundColor: '#323224'}}
         />
         <Button
           title="Criar conta"
