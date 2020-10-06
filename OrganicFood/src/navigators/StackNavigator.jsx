@@ -2,8 +2,8 @@ import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import Login from '../screens/Login';
-import DrawerNavigator from './DrawerNavigator';
-import Carrinho from '../screens/Carrinho';
+import Home from '../screens/Home';
+import Cadastro from '../screens/Cadastro';
 
 const Stack = createStackNavigator();
 
@@ -17,10 +17,14 @@ const StackNavigator = () => {
       />
       <Stack.Screen
         name="HomeStack"
-        component={DrawerNavigator}
+        component={Home}
         options={{headerShown: false}}
       />
-      <Stack.Screen name="CarrinhoStack" component={Carrinho} />
+      <Stack.Screen
+        name="CarrinhoStack"
+        component={Cadastro}
+        options={{title: 'Cadastrar Produtos'}}
+      />
     </Stack.Navigator>
   );
 };
