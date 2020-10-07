@@ -21,7 +21,7 @@ const StackNavigator = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="CarrinhoStack"
+        name="Cadastro"
         component={Cadastro}
         options={{title: 'Cadastrar Produtos'}}
       />

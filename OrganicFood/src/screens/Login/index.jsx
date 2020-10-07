@@ -20,45 +20,47 @@ const Login = ({navigation}) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.containerTxt}>
-        <Text style={styles.txtTitle}>
-          Organic <Text style={styles.txtSecondTitle}>Food</Text>
-        </Text>
-        <Image
-          style={styles.image}
-          source={require('../../assets/image/menina.png')}
-        />
-      </View>
-      <View style={styles.containerLogin}>
-        <View style={styles.containerInput}>
-          <Input value={email} placeholder={'Email'} setValue={setEmail} />
-          <Input value={senha} placeholder={'Senha'} setValue={setSenha} />
-        </View>
-        <Button
-          title="Entrar"
-          onPress={salvar}
-          textStyle={{color: '#FFF'}}
-          style={{backgroundColor: '#C13355'}}
-        />
-        <Button
-          title="Criar conta"
-          onPress={cadastrar}
-          textStyle={{color: '#6F6F6F'}}
-          style={{
-            backgroundColor: '#FFF',
-            borderColor: '#6F6F6F',
-            borderWidth: 2,
-          }}
-        />
-        <TouchableOpacity onPress={() => false}>
-          <Text style={styles.primaryPart}>
-            Esqueceu sua senha?{' '}
-            <Text style={styles.secondPart}>Lembrar senha</Text>
+    <>
+      <View style={styles.container}>
+        <View style={styles.containerTxt}>
+          <Text style={styles.txtTitle}>
+            Organic <Text style={styles.txtSecondTitle}>Food</Text>
           </Text>
-        </TouchableOpacity>
+          <Image
+            style={styles.image}
+            source={require('../../assets/image/menina.png')}
+          />
+        </View>
+        <View style={styles.containerLogin}>
+          <View style={styles.containerInput}>
+            <Input value={email} placeholder={'Email'} setValue={setEmail} />
+            <Input value={senha} placeholder={'Senha'} setValue={setSenha} />
+          </View>
+          <Button
+            title="Entrar"
+            onPress={salvar}
+            textStyle={{color: '#FFF'}}
+            style={{backgroundColor: '#C13355'}}
+          />
+          <Button
+            title="Criar conta"
+            onPress={cadastrar}
+            textStyle={{color: '#6F6F6F'}}
+            style={{
+              backgroundColor: '#FFF',
+              borderColor: '#6F6F6F',
+              borderWidth: 2,
+            }}
+          />
+          <TouchableOpacity onPress={() => false}>
+            <Text style={styles.primaryPart}>
+              Esqueceu sua senha?{' '}
+              <Text style={styles.secondPart}>Lembrar senha</Text>
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </>
   );
 };
 
